@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
+});
+
+Route::get('/login', function() {
+    if (Auth::check()) {
+        return redirect('/admin');
+    } else {
+        return View('login');
+    }
+})->name('login');
+
+Route::middleware('auth')->group(function() {
+    Route::get('/admin', function() {
+        return View('admin');
+    });
 });
