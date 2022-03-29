@@ -34,6 +34,8 @@ Route::get('/logout', function() {
     return redirect('/');
 });
 
+Route::post('/requests', [\App\Http\Controllers\RequestsController::class, 'addRequest']);
+
 Route::middleware('auth')->group(function() {
     Route::get('/admin', function() {
         return View('admin');
