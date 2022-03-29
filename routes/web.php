@@ -26,6 +26,14 @@ Route::get('/login', function() {
     }
 })->name('login');
 
+Route::get('/admin/login', [\App\Http\Controllers\AuthController::class, 'login']);
+Route::get('/logout', function() {
+    if (Auth::check()) {
+        Auth::logout();
+    }
+    return redirect('/');
+});
+
 Route::middleware('auth')->group(function() {
     Route::get('/admin', function() {
         return View('admin');
