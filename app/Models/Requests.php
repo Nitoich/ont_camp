@@ -12,7 +12,8 @@ class Requests extends Model
     protected $fillable = [
         'full_name',
         'old',
-        'camp_id'
+        'camp_id',
+        'phone'
     ];
 
     protected $with = ['camp'];

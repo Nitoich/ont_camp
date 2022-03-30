@@ -27,8 +27,13 @@
                 <div class="input-block">
                     <input type="text" placeholder="ФИО" required name="full_name">
                 </div>
+
                 <div class="input-block">
                     <input type="text" placeholder="Возраст" required name="old">
+                </div>
+
+                <div class="input-block">
+                    <input type="tel" placeholder="Телефон" required name="phone">
                 </div>
 
                 <div class="input-block">

@@ -13,7 +13,8 @@ class RequestsController extends Controller
         $validator = Validator::make($request->all(), [
             'full_name' => 'required',
             'old' => 'required|numeric',
-            'camp_id' => 'required|numeric'
+            'camp_id' => 'required|numeric',
+            'phone' => 'required|numeric'
         ]);
 
         if($validator->fails()) {
@@ -25,7 +26,8 @@ class RequestsController extends Controller
         $req = Requests::create([
             'full_name' => $request->full_name,
             'old' => $request->old,
-            'camp_id' => $request->camp_id
+            'camp_id' => $request->camp_id,
+            'phone' => $request-phone
         ]);
 
         if($req) {
