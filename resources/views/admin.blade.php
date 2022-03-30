@@ -5,6 +5,7 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>ADMIN</title>
         <link rel="stylesheet" href="/adm.css">
     </head>
@@ -25,9 +26,19 @@
                 </ul>
 
                 <ul class="camps__list" id="camps">
+                    <form method="post" action="/camp">
+                        @csrf
+                        <input type="text" placeholder="Название лагеря" name="name">
+                        <button type="submit">Добавить</button>
+                    </form>
                     @foreach(\App\Models\Camp::all() as $camp)
                         <li class="camps__item">
                             <div class="name">{{ $camp->name }}</div>
+                            <form action="/camp/delete" method="post">
+                                @csrf
+                                <input type="hidden" value="{{ $camp->id }}" name="id">
+                                <button type="submit">УДАЛИТЬ</button>
+                            </form>
                         </li>
                     @endforeach
                 </ul>

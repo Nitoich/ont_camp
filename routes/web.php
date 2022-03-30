@@ -40,4 +40,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/admin', function() {
         return View('admin');
     });
+
+    Route::post('/camp', [\App\Http\Controllers\CampController::class, 'add']);
+    Route::post('/camp/delete', [\App\Http\Controllers\CampController::class, 'delete']);
 });

@@ -27,7 +27,7 @@ class RequestsController extends Controller
             'full_name' => $request->full_name,
             'old' => $request->old,
             'camp_id' => $request->camp_id,
-            'phone' => $request-phone
+            'phone' => $request->phone
         ]);
 
         if($req) {
