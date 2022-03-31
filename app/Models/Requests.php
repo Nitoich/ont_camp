@@ -13,7 +13,8 @@ class Requests extends Model
         'full_name',
         'old',
         'camp_id',
-        'phone'
+        'phone',
+        'email'
     ];
 
     protected $with = ['camp'];

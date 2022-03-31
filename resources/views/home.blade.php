@@ -37,6 +37,10 @@
                 </div>
 
                 <div class="input-block">
+                    <input type="email" placeholder="EMAIL" required name="email">
+                </div>
+
+                <div class="input-block">
                     <select name="camp_id" id="">
                         @foreach(\App\Models\Camp::all() as $camp)
                             <option value="{{ $camp->id }}">{{ $camp->name }}</option>

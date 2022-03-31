@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('full_name');
             $table->integer('old');
             $table->string('phone');
+            $table->string('email');
             $table->foreignId('camp_id')->constrained('camps', 'id');
             $table->boolean('viewed')->default(0);
             $table->timestamps();

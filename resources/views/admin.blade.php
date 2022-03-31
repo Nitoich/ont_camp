@@ -19,6 +19,7 @@
                             <div class="name">ФИО: {{ $req->full_name }}</div>
                             <div class="old">Возраст: {{ $req->old }}</div>
                             <div class="camp">Лагерь: {{ $req->camp->name }}</div>
+                            <div class="camp">EMAIL: {{ $req->email }}</div>
                             <div class="camp">Телефон: {{ $req->phone }}</div>
                             <div class="camp">Дата: {{ explode(' ', $req->created_at)[0]}}</div>
                         </li>

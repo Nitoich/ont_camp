@@ -14,7 +14,8 @@ class RequestsController extends Controller
             'full_name' => 'required',
             'old' => 'required|numeric',
             'camp_id' => 'required|numeric',
-            'phone' => 'required|numeric'
+            'phone' => 'required|numeric',
+            'email' => 'required'
         ]);
 
         if($validator->fails()) {
@@ -27,7 +28,8 @@ class RequestsController extends Controller
             'full_name' => $request->full_name,
             'old' => $request->old,
             'camp_id' => $request->camp_id,
-            'phone' => $request->phone
+            'phone' => $request->phone,
+            'email' => $request->email
         ]);
 
         if($req) {
