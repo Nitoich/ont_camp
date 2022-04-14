@@ -12,8 +12,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>ADMIN</title>
         <link rel="stylesheet" href="/adm.css">
+        <script src="https://unpkg.com/vue@3"></script>
+        <script src="/vue/camps.js"></script>
     </head>
     <body>
+    @csrf
         <div class="wrapper">
             <div class="Requests">
                 <h1 class="title"><a href="#requests">Заявки</a><?php if($USER->getAccess() == 3) {?><a href="#camps">Лагеря</a><?php } ?></h1>
@@ -30,23 +33,19 @@
                     @endforeach
                 </ul>
 
-                <ul class="camps__list" id="camps">
-                    <form method="post" action="/camp">
-                        @csrf
-                        <input type="text" placeholder="Название лагеря" name="name">
-                        <button type="submit">Добавить</button>
-                    </form>
-                    @foreach(\App\Models\Camp::all() as $camp)
-                        <li class="camps__item">
-                            <div class="name">{{ $camp->name }}</div>
-                            <form action="/camp/delete" method="post">
-                                @csrf
-                                <input type="hidden" value="{{ $camp->id }}" name="id">
-                                <button type="submit">УДАЛИТЬ</button>
-                            </form>
+                <div class="camps__list" id="camps">
+                    <ul class="regions">
+                        <li class="regions__item" v-for="item in this.regionsList" :data-id="item.id" @click="this.selectRegion($event)">
+                            @{{ item.name }}
                         </li>
-                    @endforeach
-                </ul>
+                    </ul>
+
+                    <ul class="camps">
+                        <li class="regions__item" v-for="item in this.campsList" :data-id="item.id">
+                            @{{ item.name }}
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </body>

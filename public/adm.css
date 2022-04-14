@@ -35,7 +35,24 @@
     display: none;
 }
 
-.requests__list:target,
 .camps__list:target {
+    display: flex;
+}
+
+.camps__list > * {
+    flex: 1;
+}
+
+.requests__list:target {
     display: block;
+}
+
+.regions {
+    list-style: none;
+}
+
+.regions__item {
+    padding: 10px;
+    cursor: pointer;
+    border: 2px solid #000;
 }

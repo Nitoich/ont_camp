@@ -41,6 +41,9 @@ Route::middleware('auth')->group(function() {
         return View('admin');
     });
 
-    Route::post('/camp', [\App\Http\Controllers\CampController::class, 'add']);
-    Route::post('/camp/delete', [\App\Http\Controllers\CampController::class, 'delete']);
+//    Route::post('/camp', [\App\Http\Controllers\CampController::class, 'add']);
+//    Route::post('/camp/delete', [\App\Http\Controllers\CampController::class, 'delete']);
+
+    Route::get('/region', [\App\Http\Controllers\RegionController::class, 'get']);
+    Route::get('/camp', [\App\Http\Controllers\CampController::class, 'getByIdRegions']);
 });

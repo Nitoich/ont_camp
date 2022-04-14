@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Camp;
+use App\Models\Region;
 use App\Models\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,6 +11,12 @@ use Illuminate\Support\Facades\View;
 
 class CampController extends Controller
 {
+    public function getByIdRegions(Request $request) {
+        $region = Region::where('id', $_REQUEST['id'])->first();
+        return response()->json($region->camps);
+    }
+
+
     public function add(Request $request) {
         $validator = Validator::make($request->all(), [
             'name' => 'required'
