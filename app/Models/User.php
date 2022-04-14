@@ -22,6 +22,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function getAccess() {
+        return $this->access_level;
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

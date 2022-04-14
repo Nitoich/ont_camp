@@ -1,3 +1,7 @@
+<?php
+    $USER = \Illuminate\Support\Facades\Auth::user();
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -12,7 +16,7 @@
     <body>
         <div class="wrapper">
             <div class="Requests">
-                <h1 class="title"><a href="#requests">Заявки</a><a href="#camps">Лагеря</a></h1>
+                <h1 class="title"><a href="#requests">Заявки</a><?php if($USER->getAccess() == 3) {?><a href="#camps">Лагеря</a><?php } ?></h1>
                 <ul class="requests__list" id="requests">
                     @foreach(\App\Models\Requests::all() as $req)
                         <li class="requests__item">
