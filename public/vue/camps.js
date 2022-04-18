@@ -1,11 +1,17 @@
 const Camps = {
     data() {
         return {
+            lists: {
+                regionsList: undefined,
+                campsList: undefined
+            },
             csrf: document.querySelector('input[name="_token"]').value,
             idRegion: '',
             idCamp: '',
-            regionsList: undefined,
-            campsList: undefined
+            inputs: {
+                addRegion: '',
+                addCamp: ''
+            }
         }
     },
     mounted() {
@@ -20,7 +26,7 @@ const Camps = {
                 .then(res => {return res.json()})
                 .then(res => {
                     console.log(res);
-                    this.regionsList = res;
+                    this.lists.regionsList = res;
                 })
         },
         getCamps() {
@@ -30,11 +36,72 @@ const Camps = {
                 .then(res => {return res.json()})
                 .then(res => {
                     console.log(res);
-                    this.campsList = res;
+                    this.lists.campsList = res;
                 })
         },
         selectRegion(event) {
             this.idRegion = event.target.getAttribute('data-id');
+        },
+        addRegion() {
+            if(this.inputs.addRegion != '') {
+                fetch(`/region?_token=${this.csrf}&name=${this.inputs.addRegion}`, {
+                    credentials: 'same-origin',
+                    method: 'post'
+                })
+                    .then(res => {
+                        console.log(res.json())
+                        if(res.status != 201) {
+                            alert('Error!');
+                        } else {
+                            this.getRegions();
+                        }
+                    })
+            }
+        },
+        addCamp() {
+            if(this.inputs.addCamp != '' && this.idRegion != '') {
+                fetch(`/camp?_token=${this.csrf}&name=${this.inputs.addCamp}&region_id=${this.idRegion}`, {
+                    credentials: 'same-origin',
+                    method: 'post'
+                })
+                    .then(res => {
+                        console.log(res.json())
+                        if(res.status != 201) {
+                            alert('Error!');
+                        } else {
+                            this.getCamps();
+                        }
+                    })
+            }
+        },
+        delCamp(event) {
+            fetch(`/camp?_token=${this.csrf}&id=${event.target.getAttribute('data-id')}`, {
+                credentials: 'same-origin',
+                method: 'delete'
+            })
+                .then(res => {
+                    console.log(res.json())
+                    if(res.status != 200) {
+                        alert('Error!');
+                    } else {
+                        this.getCamps();
+                    }
+                })
+        },
+        delRegion(event) {
+            fetch(`/region?_token=${this.csrf}&id=${event.target.getAttribute('data-id')}`, {
+                credentials: 'same-origin',
+                method: 'delete'
+            })
+                .then(res => {
+                    console.log(res.json())
+                    if(res.status != 200) {
+                        alert('Error!');
+                    } else {
+                        this.getRegions();
+                        this.lists.campsList = undefined;
+                    }
+                })
         }
     },
     watch: {

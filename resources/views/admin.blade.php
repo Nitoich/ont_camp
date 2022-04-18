@@ -33,18 +33,45 @@
                     @endforeach
                 </ul>
 
-                <div class="camps__list" id="camps">
-                    <ul class="regions">
-                        <li class="regions__item" v-for="item in this.regionsList" :data-id="item.id" @click="this.selectRegion($event)">
-                            @{{ item.name }}
-                        </li>
-                    </ul>
+                <div id="camps">
 
-                    <ul class="camps">
-                        <li class="regions__item" v-for="item in this.campsList" :data-id="item.id">
-                            @{{ item.name }}
-                        </li>
-                    </ul>
+
+                    {{-- REGIONS ---------------------------------------------------------------------------------------------------------------------------------------}}
+                    <div class="regions">
+                        <h1>Регионы</h1>
+                        <div class="regions__add">
+                            <input type="text" placeholder="Название" v-model="this.inputs.addRegion">
+                            <button @click="this.addRegion()">Добавить</button>
+                        </div>
+{{--                        <div class="regions__search">--}}
+{{--                            <input type="text" placeholder="Поиск">--}}
+{{--                        </div>--}}
+                        <ul class="regions__list">
+                            <li class="regions__item" v-for="item in this.lists.regionsList" :data-id="item.id" @click="this.selectRegion($event)">
+                                @{{ item.name }}
+                                <div class="del-button" @click="this.delRegion($event)" :data-id="item.id">X</div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    {{-- CAMPS ----------------------------------------------------------------------------------------------------------------------------------------}}
+                    <div class="camps">
+                        <h1>Лагеря</h1>
+                        <div class="camps__add">
+                            <input type="text" placeholder="Название" v-model="this.inputs.addCamp">
+                            <button @click="this.addCamp()">Добавить</button>
+                        </div>
+{{--                        <div class="camps__search">--}}
+{{--                            <input type="text" placeholder="Поиск">--}}
+{{--                        </div>--}}
+                        <ul class="camps__list">
+                            <li class="camp__item" v-for="item in this.lists.campsList" :data-id="item.id">
+                                @{{ item.name }}
+                                <div class="del-button" :data-id="item.id" @click="this.delCamp($event)">X</div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

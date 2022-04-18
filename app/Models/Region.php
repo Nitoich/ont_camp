@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Region extends Model
 {
     use HasFactory;
-    protected $with = ['camps'];
+    public $fillable = [
+        'name'
+    ];
+//    protected $with = ['camps'];
     public function camps() {
         return $this->hasMany(Camp::class, 'region_id', 'id');
     }

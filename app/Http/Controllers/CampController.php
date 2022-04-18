@@ -19,21 +19,21 @@ class CampController extends Controller
 
     public function add(Request $request) {
         $validator = Validator::make($request->all(), [
-            'name' => 'required'
+            'name' => 'required',
+            'region_id' => 'required'
         ]);
 
         if($validator->fails()) {
-            return redirect('/admin#camps')->withErrors([
-                'NameError' => 'Поле не должно быть пустым!'
-            ]);
+            return response()->json()->setStatusCode(400);
         }
 
         $camp = Camp::create([
-            'name' => $request->name
+            'name' => $request->name,
+            'region_id' => $request->region_id
         ]);
 
         if($camp) {
-            return redirect('/admin#camps');
+            return response()->json()->setStatusCode(201);
         }
     }
 
@@ -43,16 +43,14 @@ class CampController extends Controller
         ]);
 
         if($validator->fails()) {
-            return redirect('/admin#camps')->withErrors([
-                'NameError' => 'Поле не должно быть пустым!'
-            ]);
+            return response()->json()->setStatusCode(400);
         }
 
         $camp = Camp::where('id', $request->id)->first();
 
         if($camp) {
             $camp->delete();
-            return redirect('/admin#camps');
+            return response()->json()->setStatusCode(200);
         }
     }
 }

@@ -11,5 +11,5 @@ class Camp extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'region_id'];
 }
