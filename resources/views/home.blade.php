@@ -8,6 +8,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Camp</title>
         <link rel="stylesheet" href="/app.css">
+        <script src="https://unpkg.com/vue@3"></script>
+        <script src="/vue/homeForm.js"></script>
         <script src="/modalClass.js"></script>
         <script>
             window.addEventListener('DOMContentLoaded', () => {
@@ -32,7 +34,7 @@
                     <div class="modal-content">
                     <p>Межрегиональная ассоциация профессиональных образовательных организаций приглашает учеников 8-9 классов принять участие в летней профориентационной школе «Ориентир-2022». Профориентационная школа «Ориентир-2022» расширит профориентационные возможности для осознанного профессионального самоопределения и выбора профессии. Участники летней школы пройдут профессиональные пробы по различным сферам профессиональной деятельности, выполнят творческие командные профориентационные проекты, станут участниками интерактивных мастер-классов и профориентационных экскурсий.
 <br>Школа пройдёт в период с 04 по 08 июля на площадках колледжей и техникумов Калининградской, Оренбургской областей и Республики Бурятия.
-<br>Проект реализуется при поддержке Фонда президентских грантов, участие в проекте бесплатное. 
+<br>Проект реализуется при поддержке Фонда президентских грантов, участие в проекте бесплатное.
 <br>Для регистрации Вашего ребёнка заполните форму обратной связи.
 <p></div>`);
                 });
@@ -46,7 +48,7 @@
             </div>
             <div class="title">
                 Профориентационная школа «Ориентир-2022»
-                
+
             </div>
             <a href="#" id="more">Подробнее</a>
             @error('succes')
@@ -54,7 +56,7 @@
                 <p>{{ $message }}</p>
             </div>
             @enderror
-            <form method="post" action="/requests" class="form-container">
+            <form method="post" action="/requests" class="form-container" id="home-form-send-request">
                 @csrf
                 <div class="input-block">
                     <input type="text" placeholder="ФИО" required name="full_name">
@@ -73,10 +75,16 @@
                 </div>
 
                 <div class="input-block">
-                    <select name="camp_id" id="">
-                        @foreach(\App\Models\Camp::all() as $camp)
-                            <option value="{{ $camp->id }}">{{ $camp->name }}</option>
+                    <select name="region_id">
+                        @foreach(\App\Models\Region::all() as $region)
+                            <option value="{{ $region->id }}">{{ $region->name }}</option>
                         @endforeach
+                    </select>
+                </div>
+
+                <div class="input-block">
+                    <select name="camp_id" :disabled="!this.campsList">
+                        <option v-for="item in this.campsList" :value="item.id">@{{ item.name }}</option>
                     </select>
                 </div>
 
